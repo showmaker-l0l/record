@@ -1,0 +1,12 @@
+<litepal>
+
+    <dbname value="record"/>
+    <version value="1"/>
+
+    <list>
+        <mapping class="com.tang.shiyan3.db.ApplicationState"/>
+        <mapping class="com.tang.shiyan3.db.AppInfo"/>
+        <mapping class="com.tang.shiyan3.db.User"/>
+        <mapping class="com.tang.shiyan3.db.AppEvent"/>
+    </list>
+</litepal>
