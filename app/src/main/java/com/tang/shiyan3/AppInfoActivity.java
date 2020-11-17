@@ -82,7 +82,7 @@ public class AppInfoActivity extends AppCompatActivity {
                     + event.getActivityName() + "\n"
                     + "事件类型："+ "\t" + event.getEventType() + "\n\n";
         }
-        usageState.setText(data + "\n\n" + "应用活动记录：\n" + eventLog);
+        usageState.setText(data + "\n\n" + "应用活动记录：\n\n" + eventLog);
 
         //在数据库中查找name = appName的数据，并显示出来
         List<AppInfo> apps = LitePal.where("name = ?",appName).limit(1).find(AppInfo.class);
@@ -200,14 +200,17 @@ public class AppInfoActivity extends AppCompatActivity {
             ApplicationState state = LitePal.
                     where("appname = ? and recordDate = ? and dataType = ? ", appName, day, GetData.DAILY_DATA).
                     findFirst(ApplicationState.class);
-
+            int count = 0;
+            if (state != null){
+                count = state.getTotalRuntime();
+            }
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日");
             Date date = sdf.parse(day);
             int d = date.getDate();
             Log.d(TAG, "init:date "+ date);
             Log.d(TAG, "init:day "+ day);
             Log.d(TAG, "init:d "+ d);
-            entries.add(new Entry(d, state.getTotalRuntime()));
+            entries.add(new Entry(d, count));
         }
         LineDataSet dataSet = new LineDataSet(entries, "应用一周使用时长统计"); // 添加数据
         LineData lineData = new LineData(dataSet);
